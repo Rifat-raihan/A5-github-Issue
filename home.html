@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>GitHub Issues Tracker</title>
+  <link rel="shortcut icon" href="assets/github-logo.png" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      font-family: "Outfit", sans-serif;
+    }
+    </style>
+    </head>
+  <body class="bg-gray-50 min-h-screen">
+
+    <header>
+      <div class="navbar bg-white shadow-sm px-4 md:px-6 border-b border-gray-200">
+        <div class="flex-1 min-w-0">
+          <a class="flex items-center gap-2 text-base md:text-xl font-bold text-gray-800">
+            <img src="assets/github-logo.png" alt="logo"
+              class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-white p-0.5 shadow shrink-0">
+            <span class="truncate">GitHub Issues Tracker</span>
+          </a>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="relative hidden sm:block w-56 md:w-72">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+            <input id="search-input" type="search" placeholder="Search issues..."
+              class="w-full border border-gray-300 rounded-lg py-2 pl-9 pr-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition" />
+          </div>
+          <button class="btn btn-sm btn-primary gap-1 shrink-0">
+            <i class="fa-solid fa-plus"></i>
+            <span class="hidden sm:inline">New Issue</span>
+          </button>
+        </div>
+      </div>
+    
+      <!-- mobile search -->
+      <div class="sm:hidden bg-white px-4 py-2 border-b border-gray-100">
+        <div class="relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+          <input id="search-input" type="search" placeholder="Search issues..."
+            class="w-full border border-gray-300 rounded-lg py-2 pl-9 pr-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition" />
+        </div>
+      </div>
+    </header>
+      
+
+
+    <script src="script/home.js"></script>
+    </body>
+    </html>
