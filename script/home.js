@@ -64,3 +64,39 @@ const displayAllData = (AllData) => {
     container.appendChild(card)
   }
 }
+
+const setTab = (tab) => {
+  currentTab = tab;
+  ['all', 'open', 'closed'].forEach(t => {
+    document.getElementById('tab-' + t).className = 'btn btn-outline btn-sm w-20 md:w-24'
+  })
+  document.getElementById('tab-' + tab).className = 'btn btn-primary btn-sm w-20 md:w-24'
+  const list = tab === 'all' ? allIssues : allIssues.filter(i => i.status === tab)
+  displayAllData(list)
+  updateCounts()
+}
+
+const searchInputs = document.querySelectorAll('#search-input')
+searchInputs.forEach(input => {
+  input.addEventListener('input', function () {
+    const q = this.value.trim()
+
+    // sync both inputs
+    searchInputs.forEach(el => { if (el !== this) el.value = this.value })
+
+    if (!q) {
+      const list = currentTab === 'all' ? allIssues : allIssues.filter(i => i.status === currentTab)
+      displayAllData(list)
+      return
+    }
+
+    showLoading(true)
+    fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=' + encodeURIComponent(q))
+      .then(res => res.json())
+      .then(data => {
+        showLoading(false)
+        displayAllData(data.data || [])
+      })
+      .catch(() => showLoading(false))
+  })
+})
