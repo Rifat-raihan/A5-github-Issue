@@ -100,3 +100,65 @@ searchInputs.forEach(input => {
       .catch(() => showLoading(false))
   })
 })
+
+
+const openModal = (id) => {
+  document.getElementById('issue-modal').classList.remove('hidden')
+  document.getElementById('modal-content').innerHTML = `
+    <div class="flex justify-center py-10">
+      <span class="loading loading-spinner loading-lg text-primary"></span>
+    </div>`
+
+  fetch('https://phi-lab-server.vercel.app/api/v1/lab/issue/' + id)
+    .then(res => res.json())
+    .then(data => {
+      const issue = data.data
+      const open  = issue.status === 'open'
+
+      document.getElementById('modal-content').innerHTML = `
+        <div class="space-y-4">
+   <h2 class="text-xl md:text-2xl font-bold text-gray-800">${issue.title}</h2>
+
+       <div class="flex items-center gap-2 flex-wrap text-sm">
+<span class="px-3 py-1 rounded-full text-white text-xs font-semibold ${open ? 'bg-green-500' : 'bg-violet-500'}">
+  ${open ? 'Opened' : 'Closed'}
+       </span>
+        <span class="text-gray-300">•</span>
+          <span class="text-gray-500">${open ? 'Opened' : 'Closed'} by <strong>${issue.author || '—'}</strong></span>
+     <span class="text-gray-300">•</span>
+   <span class="text-gray-500">${formatDate(issue.createdAt)}</span>
+        </div <div class="flex flex-wrap gap-2">
+         ${getLabelsHTML(issue.labels || [])}
+    </div>
+
+      <p class="text-gray-600 text-sm leading-relaxed">
+     ${issue.description || 'No description provided.'}
+ </p>
+
+      <div class="bg-gray-50 rounded-xl p-4 md:p-5 flex flex-wrap gap-8 border border-gray-100">
+            <div>
+       <p class="text-gray-400 text-xs mb-1">Assignee:</p>
+         <p class="font-bold text-gray-700">${issue.assignee || 'Unassigned'}</p>
+    </div>
+ <div>
+   <p class="text-gray-400 text-xs mb-1">Priority:</p>
+  <span class="px-3 py-1 rounded-full text-sm font-semibold ${getPriorityBadge(issue.priority)}">
+     ${(issue.priority || 'normal').toUpperCase()}
+       </span>
+   </div>
+   </div>
+
+<div class="flex justify-end pt-1">   <button onclick="closeModal()" class="px-7 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition text-sm">Close</button>
+          </div>
+        </div>`
+    })
+}
+
+const closeModal = () => {
+  document.getElementById('issue-modal').classList.add('hidden')
+}
+
+document.getElementById('issue-modal').addEventListener('click', function (e) {
+  if (e.target === this) closeModal()
+})
+
