@@ -162,3 +162,86 @@ document.getElementById('issue-modal').addEventListener('click', function (e) {
   if (e.target === this) closeModal()
 })
 
+
+
+const updateCounts = () => {
+  const openCount   = allIssues.filter(i => i.status === 'open').length
+  const closedCount = allIssues.filter(i => i.status === 'closed').length
+  const shown = currentTab === 'all' ? allIssues.length : allIssues.filter(i => i.status === currentTab).length
+
+  document.getElementById('issue-count-text').textContent = shown + ' Issues'
+  document.getElementById('open-count').textContent   = openCount
+  document.getElementById('closed-count').textContent = closedCount
+}
+
+const showLoading = (show) => {
+  document.getElementById('loading').classList.toggle('hidden', !show)
+}
+
+const getPriorityColor = (priority) => {
+  if (priority === 'high') {
+    return 'bg-red-100 text-red-500'
+  }
+   
+  if (priority === 'medium') {
+    return 'bg-yellow-100 text-yellow-600'
+  }
+    
+  if (priority === 'low') {
+      return 'bg-blue-100 text-blue-500'
+  }
+  
+  return 'bg-gray-100 text-gray-500'
+}
+
+const getPriorityBadge = (priority) => {
+  if (priority === 'high') {
+ return 'bg-red-500 text-white'
+  } 
+  if (priority === 'medium') {
+    return 'bg-yellow-400 text-gray-800'
+  } 
+  if (priority === 'low') {
+    return 'bg-blue-500 text-white'
+  }    
+  return 'bg-gray-400 text-white'
+}
+
+const getLabelColor = (label) => {
+  const l = label.toLowerCase()
+  if (l.includes('bug')) {
+    
+    return 'bg-red-50 text-red-500 border border-red-200'
+  } 
+  if (l.includes('help')) {
+    return 'bg-yellow-50 text-yellow-600 border border-yellow-200'
+  } 
+  if (l.includes('feature')) { return 'bg-blue-50 text-blue-500 border border-blue-200'}   
+  if (l.includes('enhancement')) {return 'bg-orange-50 text-orange-500 border border-orange-200'} 
+  if (l.includes('doc')) {
+return 'bg-purple-50 text-purple-500 border border-purple-200'
+  } 
+  if (l.includes('good')) {
+    return 'bg-green-50 text-green-600 border border-green-200'
+  }    
+  return 'bg-gray-50 text-gray-500 border border-gray-200'
+}
+
+const getLabelsHTML = (labels) => {
+  let html = ''
+  for (let label of labels) {
+    html += `<span class="px-3 py-1 rounded-full text-xs font-semibold ${getLabelColor(label)}">${label.toUpperCase()}</span>`
+  }
+  return html
+}
+
+const formatDate = (dateStr) => {
+  if (!dateStr) return '—'
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric'
+  })
+}
+
+loadAllDada()
