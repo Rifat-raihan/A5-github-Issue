@@ -53,6 +53,59 @@
       </div>
     </header>
       
+    <section class="max-w-11/12 mx-auto mt-5 px-4">
+      <div
+        class="bg-white shadow-sm rounded-xl px-4 md:px-6 py-3 md:py-4 flex flex-wrap items-center justify-between gap-3 border border-gray-100">
+        <div class="flex items-center gap-2">
+          <button id="tab-all" onclick="setTab('all')" class="btn btn-primary btn-sm w-20 md:w-24">All</button>
+          <button id="tab-open" onclick="setTab('open')" class="btn btn-outline btn-sm w-20 md:w-24">Open</button>
+          <button id="tab-closed" onclick="setTab('closed')" class="btn btn-outline btn-sm w-20 md:w-24">Closed</button>
+        </div>
+        <div class="flex items-center gap-4 text-sm text-gray-500">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-green-500 inline-block"></span>
+            Open: <span id="open-count" class="font-bold text-gray-700">0</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-purple-500 inline-block"></span>
+            Closed: <span id="closed-count" class="font-bold text-gray-700">0</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- COUNT BAR -->
+    <section class="max-w-11/12 mx-auto px-4 mt-3">
+      <div class="bg-white shadow-sm rounded-xl px-4 md:px-6 py-3 md:py-4 flex items-center gap-3 border border-gray-100">
+        <img src="assets/Aperture.png" alt="" class="w-9 h-9 shrink-0">
+        <div>
+          <h3 id="issue-count-text" class="font-bold text-lg md:text-xl text-gray-800">0 Issues</h3>
+          <p class="text-gray-400 text-xs md:text-sm">Track and manage your project issues</p>
+        </div>
+      </div>
+    </section>
+    
+    <div class="max-w-11/12 mx-auto px-4 mt-1">
+      <hr class="border-gray-200">
+    </div>
+    
+    <!-- LOADING -->
+    <div id="loading" class="flex justify-center py-16">
+      <span class="loading loading-spinner loading-lg text-primary"></span>
+    </div>
+    
+  
+    <section id="all-card-container"
+      class="max-w-11/12 mx-auto px-4 mt-4 mb-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 items-stretch">
+    </section>
+    
+
+    <section id="issue-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center px-4">
+      <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-5 md:p-7">
+        <div id="modal-content"></div>
+      </div>
+    </section>
+
 
 
     <script src="script/home.js"></script>
